@@ -16,24 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `teams`
---
-
-DROP TABLE IF EXISTS `teams`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teams` (
-  `team_id` int(11) NOT NULL AUTO_INCREMENT,
-  `team_name` varchar(45) NOT NULL,
-  `team_location` varchar(45) NOT NULL,
-  `team_venue_id` int(11) NOT NULL,
-  PRIMARY KEY (`team_id`),
-  KEY `fk_teams_venues1_idx` (`team_venue_id`),
-  CONSTRAINT `fk_teams_venues1` FOREIGN KEY (`team_venue_id`) REFERENCES `venues` (`venue_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `teams`
 --
 
@@ -51,4 +33,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-07 11:58:35
+-- Dump completed on 2019-12-03 13:34:04

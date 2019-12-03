@@ -16,6 +16,60 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Dumping data for table `all_star_players`
+--
+
+LOCK TABLES `all_star_players` WRITE;
+/*!40000 ALTER TABLE `all_star_players` DISABLE KEYS */;
+/*!40000 ALTER TABLE `all_star_players` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `all_star_teams`
+--
+
+LOCK TABLES `all_star_teams` WRITE;
+/*!40000 ALTER TABLE `all_star_teams` DISABLE KEYS */;
+/*!40000 ALTER TABLE `all_star_teams` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `championship_games`
+--
+
+LOCK TABLES `championship_games` WRITE;
+/*!40000 ALTER TABLE `championship_games` DISABLE KEYS */;
+/*!40000 ALTER TABLE `championship_games` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `offseason_transactions`
+--
+
+LOCK TABLES `offseason_transactions` WRITE;
+/*!40000 ALTER TABLE `offseason_transactions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `offseason_transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `players`
+--
+
+LOCK TABLES `players` WRITE;
+/*!40000 ALTER TABLE `players` DISABLE KEYS */;
+/*!40000 ALTER TABLE `players` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `teams`
+--
+
+LOCK TABLES `teams` WRITE;
+/*!40000 ALTER TABLE `teams` DISABLE KEYS */;
+/*!40000 ALTER TABLE `teams` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping data for table `venues`
 --
 
@@ -34,4 +88,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-03 13:34:04
+-- Dump completed on 2019-12-03 13:35:47
