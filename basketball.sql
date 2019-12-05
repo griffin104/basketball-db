@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `all_star_players`
+--
+
+DROP TABLE IF EXISTS `all_star_players`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `all_star_players` (
+  `all_star_player_id` int(11) NOT NULL AUTO_INCREMENT,
+  `asp_name` varchar(45) NOT NULL,
+  `asp_assists` int(11) NOT NULL,
+  `asp_steals` int(11) NOT NULL,
+  `asp_blocks` int(11) NOT NULL,
+  `asp_turnovers` int(11) NOT NULL,
+  `asp_points` int(11) NOT NULL,
+  `asp_field_goal_rate` decimal(9,2) NOT NULL,
+  `asp_3_point_rate` decimal(9,2) DEFAULT NULL,
+  `asp_free_throw_rate` decimal(9,2) DEFAULT NULL,
+  `player_id` int(11) DEFAULT NULL,
+  `all_star_team_id` int(11) NOT NULL COMMENT 'Add game stats\n',
+  PRIMARY KEY (`all_star_player_id`),
+  KEY `player_id_idx` (`player_id`),
+  KEY `all_star_team_id_idx` (`all_star_team_id`),
+  CONSTRAINT `all_star_team_id` FOREIGN KEY (`all_star_team_id`) REFERENCES `all_star_teams` (`ast_id`),
+  CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `all_star_players`
 --
 
@@ -24,6 +52,29 @@ LOCK TABLES `all_star_players` WRITE;
 INSERT INTO `all_star_players` VALUES (1,'LeBron James',4,0,2,1,19,0.53,0.13,0.00,216,1),(2,'James Harden',3,1,0,3,12,0.31,0.31,NULL,166,1),(3,'Kevin Durant',2,1,2,2,31,0.67,0.67,1.00,121,1),(4,'Kyrie Irving',6,1,1,1,13,0.50,0.25,NULL,207,1),(5,'Kawhi Leonard',2,0,1,0,19,0.50,0.46,NULL,253,1),(6,'Damian Lillard',5,2,0,1,18,0.35,0.35,NULL,NULL,1),(7,'Klay Thompson',4,1,0,0,20,0.44,0.50,NULL,NULL,1),(8,'Bradley Beal',3,1,0,0,11,0.36,0.30,NULL,32,1),(9,'Ben Simmons',7,1,0,0,10,1.00,NULL,NULL,NULL,1),(10,'Karl-Anthony Towns',1,1,0,0,11,0.71,0.33,NULL,NULL,1),(11,'LaMarcus Aldridge',1,0,0,0,2,0.50,NULL,NULL,6,1),(12,'Dwyane Wade',4,0,0,1,7,0.50,0.50,1.00,NULL,1),(13,'Anthony Davis',0,0,0,0,5,1.00,1.00,NULL,105,1),(14,'Stephen Curry',7,0,0,2,17,0.26,0.24,1.00,103,2),(15,'Giannis Antetokounmpo',5,1,0,3,38,0.74,0.33,1.00,14,2),(16,'Paul George',4,3,0,0,20,0.50,0.50,NULL,148,2),(17,'Joel Embiid',1,1,1,1,10,0.33,0.00,0.50,124,2),(18,'Kemba Walker',8,1,0,0,4,0.25,0.00,NULL,NULL,2),(19,'Khris Middleton',4,0,0,1,20,0.54,0.60,NULL,289,2),(20,'Blake Griffin',3,0,0,0,10,0.50,0.50,NULL,163,2),(21,'Russell Westbrook',3,1,0,1,17,0.40,0.13,NULL,NULL,2),(22,'Nikola Jokić',0,0,0,1,6,0.75,NULL,NULL,227,2),(23,'Kyle Lowry',3,0,0,1,3,0.20,0.25,NULL,264,2),(24,'D\'Angelo Russell',3,0,0,1,6,0.40,0.40,NULL,NULL,2),(25,'Nikola Vučević',2,1,0,0,4,1.00,NULL,NULL,NULL,2),(26,'Dirk Nowitzki',0,0,0,1,9,1.00,1.00,NULL,NULL,2);
 /*!40000 ALTER TABLE `all_star_players` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `all_star_teams`
+--
+
+DROP TABLE IF EXISTS `all_star_teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `all_star_teams` (
+  `ast_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ast_name` varchar(45) NOT NULL,
+  `ast_year` int(11) NOT NULL,
+  `ast_q1_score` int(11) NOT NULL,
+  `ast_q2_score` int(11) NOT NULL,
+  `ast_q3_score` int(11) NOT NULL,
+  `ast_q4_score` int(11) NOT NULL,
+  `ast_total_score` int(11) NOT NULL,
+  `ast_venue_id` int(11) NOT NULL,
+  PRIMARY KEY (`ast_id`),
+  KEY `all-star-venue_idx` (`ast_venue_id`),
+  CONSTRAINT `all-star-venue` FOREIGN KEY (`ast_venue_id`) REFERENCES `venues` (`venue_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `all_star_teams`
@@ -36,6 +87,33 @@ INSERT INTO `all_star_teams` VALUES (1,'LeBron',2019,37,45,50,46,178,20),(2,'Gia
 UNLOCK TABLES;
 
 --
+-- Table structure for table `championship_players`
+--
+
+DROP TABLE IF EXISTS `championship_players`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `championship_players` (
+  `champ_player_id` int(11) NOT NULL AUTO_INCREMENT,
+  `player_id` int(11) DEFAULT NULL,
+  `championship_team_id` int(11) NOT NULL,
+  `champ_player_assists` int(11) NOT NULL,
+  `champ_player_steals` int(11) NOT NULL,
+  `champ_player_blocks` int(11) NOT NULL,
+  `champ_player_turnovers` int(11) NOT NULL,
+  `champ_player_points` int(11) NOT NULL,
+  `champ_player_field_goal_rate` decimal(9,1) DEFAULT NULL,
+  `champ_player_3_point_rate` decimal(9,1) DEFAULT NULL,
+  `champ_player_free_throw_rate` decimal(9,1) DEFAULT NULL,
+  PRIMARY KEY (`champ_player_id`),
+  KEY `champ-player-game_idx` (`championship_team_id`),
+  KEY `champ-player-id_idx` (`player_id`),
+  CONSTRAINT `champ-player-game` FOREIGN KEY (`championship_team_id`) REFERENCES `championship_teams` (`championship_team_id`),
+  CONSTRAINT `champ-player-id` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `championship_players`
 --
 
@@ -44,6 +122,27 @@ LOCK TABLES `championship_players` WRITE;
 INSERT INTO `championship_players` VALUES (1,253,1,25,12,7,18,171,0.4,0.4,0.9),(2,NULL,1,22,3,4,9,119,0.5,0.2,0.8),(3,264,1,43,10,3,15,97,0.4,0.4,0.8),(4,NULL,1,13,7,0,6,84,0.4,0.4,0.9),(5,145,1,16,3,2,7,72,0.4,0.3,0.9),(6,201,1,6,5,10,8,68,0.6,0.3,0.8),(7,158,1,7,7,3,8,44,0.4,0.4,NULL),(8,NULL,1,4,2,0,2,11,0.3,0.2,1.0),(9,277,1,2,0,0,0,3,0.5,1.0,NULL),(10,258,1,0,0,0,0,0,NULL,NULL,NULL),(11,286,1,0,0,0,0,0,NULL,NULL,NULL),(12,292,1,0,0,0,0,0,NULL,NULL,NULL),(13,103,2,36,9,1,17,183,0.4,0.3,0.9),(14,NULL,2,12,4,0,6,130,0.5,0.6,0.9),(15,159,2,56,10,6,30,75,0.4,0.3,0.9),(16,202,2,24,6,9,9,55,0.4,0.3,0.3),(17,95,2,14,4,6,13,50,0.4,0.2,0.6),(18,93,2,5,1,1,2,29,0.4,0.3,1.0),(19,260,2,6,2,1,5,29,0.6,NULL,0.3),(20,259,2,9,4,1,5,28,0.4,0.0,1.0),(21,220,2,1,0,0,0,14,0.3,0.4,0.8),(22,284,2,2,0,0,3,13,0.3,0.3,0.0),(23,NULL,2,3,1,1,2,12,0.8,NULL,NULL),(24,121,2,0,0,1,1,11,0.6,1.0,1.0),(25,36,2,1,0,2,0,6,0.8,NULL,NULL),(26,NULL,2,0,0,0,0,0,0.0,0.0,NULL),(27,NULL,2,0,0,0,0,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `championship_players` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `championship_teams`
+--
+
+DROP TABLE IF EXISTS `championship_teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `championship_teams` (
+  `championship_team_id` int(11) NOT NULL AUTO_INCREMENT,
+  `championship_year` int(11) NOT NULL,
+  `championship_games_won` int(11) NOT NULL,
+  `championship_games_lost` int(11) NOT NULL,
+  `championship_final_score` int(11) NOT NULL,
+  `championship_average_points` decimal(9,1) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  PRIMARY KEY (`championship_team_id`),
+  KEY `champ-team-id_idx` (`team_id`),
+  CONSTRAINT `champ-team-id` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `championship_teams`
@@ -56,6 +155,29 @@ INSERT INTO `championship_teams` VALUES (1,2019,2,4,110,105.8,30),(2,2019,4,2,11
 UNLOCK TABLES;
 
 --
+-- Table structure for table `offseason_transactions`
+--
+
+DROP TABLE IF EXISTS `offseason_transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `offseason_transactions` (
+  `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `new_salary` int(11) DEFAULT NULL,
+  `former_team_id` int(11) NOT NULL,
+  `new_team_id` int(11) NOT NULL,
+  `player_id` int(11) NOT NULL,
+  PRIMARY KEY (`transaction_id`),
+  KEY `former_id_idx` (`former_team_id`),
+  KEY `new_team_idx` (`new_team_id`),
+  KEY `player_id_idx` (`player_id`),
+  CONSTRAINT `former_id` FOREIGN KEY (`former_team_id`) REFERENCES `teams` (`team_id`),
+  CONSTRAINT `new_team` FOREIGN KEY (`new_team_id`) REFERENCES `teams` (`team_id`),
+  CONSTRAINT `transaction_player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `offseason_transactions`
 --
 
@@ -63,6 +185,36 @@ LOCK TABLES `offseason_transactions` WRITE;
 /*!40000 ALTER TABLE `offseason_transactions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `offseason_transactions` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `players`
+--
+
+DROP TABLE IF EXISTS `players`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `players` (
+  `player_id` int(11) NOT NULL AUTO_INCREMENT,
+  `player_rank` int(11) NOT NULL,
+  `player_name` varchar(45) NOT NULL,
+  `player_age` int(11) NOT NULL,
+  `player_position` varchar(45) NOT NULL,
+  `player_games` int(11) NOT NULL,
+  `player_avg_minutes_played` decimal(9,1) NOT NULL,
+  `player_field_goal_rate` decimal(9,1) NOT NULL,
+  `player_3_point_rate` decimal(9,1) NOT NULL,
+  `player_free_throw_rate` decimal(9,1) NOT NULL,
+  `player_avg_assists` decimal(9,1) NOT NULL,
+  `player_avg_steals` decimal(9,1) NOT NULL,
+  `player_avg_blocks` decimal(9,1) NOT NULL,
+  `player_avg_turnovers` decimal(9,1) NOT NULL,
+  `player_avg_points` decimal(9,1) NOT NULL,
+  `current_team_id` int(11) NOT NULL,
+  PRIMARY KEY (`player_id`),
+  KEY `current_team_idx` (`current_team_id`),
+  CONSTRAINT `current_team` FOREIGN KEY (`current_team_id`) REFERENCES `teams` (`team_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `players`
@@ -75,6 +227,36 @@ INSERT INTO `players` VALUES (1,1,'Alex Abrines',24,'SG',75,15.1,0.4,0.4,0.8,0.4
 UNLOCK TABLES;
 
 --
+-- Table structure for table `teams`
+--
+
+DROP TABLE IF EXISTS `teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `teams` (
+  `team_id` int(11) NOT NULL AUTO_INCREMENT,
+  `team_rank` int(11) NOT NULL,
+  `team_name` varchar(45) NOT NULL,
+  `team_games_played` int(11) NOT NULL,
+  `team_wins` int(11) NOT NULL,
+  `team_losses` int(11) NOT NULL,
+  `team_avg_points` decimal(9,1) NOT NULL,
+  `team_field_goal_rate` decimal(9,1) NOT NULL,
+  `team_3_point_rate` decimal(9,1) NOT NULL,
+  `team_free_throw_rate` decimal(9,1) NOT NULL,
+  `team_avg_rebounds` decimal(9,1) NOT NULL,
+  `team_avg_assists` decimal(9,1) NOT NULL,
+  `team_avg_turnovers` decimal(9,1) NOT NULL,
+  `team_avg_steals` decimal(9,1) NOT NULL,
+  `team_avg_blocks` decimal(9,1) NOT NULL,
+  `team_venue_id` int(11) NOT NULL,
+  PRIMARY KEY (`team_id`),
+  KEY `fk_teams_venues1_idx` (`team_venue_id`),
+  CONSTRAINT `fk_teams_venues1` FOREIGN KEY (`team_venue_id`) REFERENCES `venues` (`venue_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `teams`
 --
 
@@ -83,6 +265,24 @@ LOCK TABLES `teams` WRITE;
 INSERT INTO `teams` VALUES (1,1,'Los Angeles Lakers',22,19,3,112.3,48.3,36.1,73.4,45.4,26.5,14.9,8.7,7.4,22),(2,1,'Milwaukee Bucks',22,19,3,121.1,48.4,35.3,71.9,51.8,25.6,14.8,7.5,6.2,11),(3,3,'Boston Celtics',20,15,5,110.8,44.1,34.8,80.1,46.5,23.6,13.1,8.9,5.9,26),(4,3,'Toronto Raptors',20,15,5,113.1,45.9,39.3,80.2,46.2,25.8,15.2,7.9,5.1,18),(5,5,'LA Clippers',22,16,6,115.5,46.0,36.0,77.5,49.0,23.5,16.2,7.6,5.5,21),(6,6,'Denver Nuggets',18,13,5,106.1,44.5,34.5,74.5,46.9,25.9,13.9,8.0,5.0,16),(7,7,'Dallas Mavericks',21,15,6,118.0,46.2,36.1,77.7,47.8,24.3,12.9,6.6,4.6,2),(8,7,'Miami Heat',21,15,6,111.0,47.4,38.8,75.9,44.9,25.0,18.2,8.6,4.7,1),(9,7,'Philadelphia 76ers',21,15,6,108.6,46.6,35.7,74.8,46.3,26.1,16.5,8.9,5.7,30),(10,10,'Indiana Pacers',21,14,7,109.9,47.4,36.7,81.8,44.7,24.8,14.0,6.8,5.0,5),(11,11,'Houston Rockets',20,13,7,120.9,44.7,34.0,78.9,48.0,21.7,15.4,8.6,4.8,27),(12,12,'Utah Jazz',22,12,10,105.7,44.9,37.7,76.7,45.3,21.0,16.3,6.0,4.4,29),(13,13,'Brooklyn Nets',21,11,10,113.0,45.2,35.2,74.2,47.1,23.9,16.0,6.9,5.2,6),(14,14,'Minnesota Timberwolves',20,10,10,113.7,43.7,33.0,76.0,48.3,23.7,15.6,8.2,6.6,25),(15,15,'Orlando Magic',21,10,11,103.5,43.5,33.0,77.9,45.8,22.5,13.8,8.1,6.6,3),(16,16,'Phoenix Suns',20,9,11,114.4,46.2,36.4,80.4,41.6,28.1,14.1,7.8,3.9,24),(17,17,'Portland Trail Blazers',22,9,13,113.5,45.5,36.9,81.4,46.6,20.3,13.7,5.9,6.2,15),(18,18,'Oklahoma City Thunder',20,8,12,107.1,46.2,35.4,78.8,42.4,22.1,14.6,7.3,4.7,9),(19,18,'Sacramento Kings',20,8,12,104.9,44.8,35.1,77.7,41.9,22.9,15.8,7.7,4.9,12),(20,20,'Charlotte Hornets',23,9,14,105.4,44.7,36.5,73.2,41.9,24.2,15.7,6.8,4.3,20),(21,21,'Chicago Bulls',22,8,14,106.4,42.6,34.8,74.9,43.8,22.8,15.7,9.5,4.1,28),(22,21,'Detroit Pistons',22,8,14,108.8,47.3,39.5,73.8,42.7,25.5,16.3,6.6,5.2,13),(23,21,'San Antonio Spurs',22,8,14,112.0,46.6,35.3,78.2,45.8,24.5,13.6,6.4,5.7,4),(24,24,'Washington Wizards',19,6,13,118.9,47.8,37.1,80.6,41.8,28.4,14.6,7.4,3.8,7),(25,25,'Memphis Grizzlies',21,6,15,108.5,44.9,34.6,77.6,45.5,26.5,16.0,7.7,5.3,10),(26,25,'New Orleans Pelicans',21,6,15,113.7,45.1,37.7,73.5,45.0,24.8,15.8,7.9,4.9,19),(27,27,'Cleveland Cavaliers',20,5,15,104.2,43.6,34.2,77.8,44.0,20.4,15.1,7.4,3.2,17),(28,28,'Atlanta Hawks',22,5,17,108.0,45.3,31.2,74.6,41.7,23.3,17.7,8.8,4.9,23),(29,29,'New York Knicks',21,4,17,100.9,42.2,36.3,67.4,44.7,19.6,15.1,7.8,4.6,14),(30,30,'Golden State Warriors',23,4,19,104.9,43.0,32.5,83.1,43.3,23.8,14.7,7.9,4.6,8);
 /*!40000 ALTER TABLE `teams` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `venues`
+--
+
+DROP TABLE IF EXISTS `venues`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `venues` (
+  `venue_id` int(11) NOT NULL AUTO_INCREMENT,
+  `venue_name` varchar(45) NOT NULL,
+  `venue_location` varchar(45) NOT NULL,
+  `venue_capacity` int(11) NOT NULL,
+  `venue_home_team` varchar(45) NOT NULL,
+  `venue_year_opened` varchar(45) NOT NULL,
+  PRIMARY KEY (`venue_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `venues`
@@ -103,4 +303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 16:02:43
+-- Dump completed on 2019-12-05 18:05:22

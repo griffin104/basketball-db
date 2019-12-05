@@ -16,6 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `players`
+--
+
+DROP TABLE IF EXISTS `players`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `players` (
+  `player_id` int(11) NOT NULL AUTO_INCREMENT,
+  `player_rank` int(11) NOT NULL,
+  `player_name` varchar(45) NOT NULL,
+  `player_age` int(11) NOT NULL,
+  `player_position` varchar(45) NOT NULL,
+  `player_games` int(11) NOT NULL,
+  `player_avg_minutes_played` decimal(9,1) NOT NULL,
+  `player_field_goal_rate` decimal(9,1) NOT NULL,
+  `player_3_point_rate` decimal(9,1) NOT NULL,
+  `player_free_throw_rate` decimal(9,1) NOT NULL,
+  `player_avg_assists` decimal(9,1) NOT NULL,
+  `player_avg_steals` decimal(9,1) NOT NULL,
+  `player_avg_blocks` decimal(9,1) NOT NULL,
+  `player_avg_turnovers` decimal(9,1) NOT NULL,
+  `player_avg_points` decimal(9,1) NOT NULL,
+  `current_team_id` int(11) NOT NULL,
+  PRIMARY KEY (`player_id`),
+  KEY `current_team_idx` (`current_team_id`),
+  CONSTRAINT `current_team` FOREIGN KEY (`current_team_id`) REFERENCES `teams` (`team_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `players`
 --
 
@@ -34,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 16:02:18
+-- Dump completed on 2019-12-05 18:05:57

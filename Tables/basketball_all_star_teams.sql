@@ -16,6 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `all_star_teams`
+--
+
+DROP TABLE IF EXISTS `all_star_teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `all_star_teams` (
+  `ast_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ast_name` varchar(45) NOT NULL,
+  `ast_year` int(11) NOT NULL,
+  `ast_q1_score` int(11) NOT NULL,
+  `ast_q2_score` int(11) NOT NULL,
+  `ast_q3_score` int(11) NOT NULL,
+  `ast_q4_score` int(11) NOT NULL,
+  `ast_total_score` int(11) NOT NULL,
+  `ast_venue_id` int(11) NOT NULL,
+  PRIMARY KEY (`ast_id`),
+  KEY `all-star-venue_idx` (`ast_venue_id`),
+  CONSTRAINT `all-star-venue` FOREIGN KEY (`ast_venue_id`) REFERENCES `venues` (`venue_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `all_star_teams`
 --
 
@@ -34,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 16:02:17
+-- Dump completed on 2019-12-05 18:05:56

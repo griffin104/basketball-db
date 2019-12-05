@@ -16,6 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `offseason_transactions`
+--
+
+DROP TABLE IF EXISTS `offseason_transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `offseason_transactions` (
+  `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `new_salary` int(11) DEFAULT NULL,
+  `former_team_id` int(11) NOT NULL,
+  `new_team_id` int(11) NOT NULL,
+  `player_id` int(11) NOT NULL,
+  PRIMARY KEY (`transaction_id`),
+  KEY `former_id_idx` (`former_team_id`),
+  KEY `new_team_idx` (`new_team_id`),
+  KEY `player_id_idx` (`player_id`),
+  CONSTRAINT `former_id` FOREIGN KEY (`former_team_id`) REFERENCES `teams` (`team_id`),
+  CONSTRAINT `new_team` FOREIGN KEY (`new_team_id`) REFERENCES `teams` (`team_id`),
+  CONSTRAINT `transaction_player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `offseason_transactions`
 --
 
@@ -33,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 16:02:18
+-- Dump completed on 2019-12-05 18:05:58

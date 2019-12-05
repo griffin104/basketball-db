@@ -16,6 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `championship_teams`
+--
+
+DROP TABLE IF EXISTS `championship_teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `championship_teams` (
+  `championship_team_id` int(11) NOT NULL AUTO_INCREMENT,
+  `championship_year` int(11) NOT NULL,
+  `championship_games_won` int(11) NOT NULL,
+  `championship_games_lost` int(11) NOT NULL,
+  `championship_final_score` int(11) NOT NULL,
+  `championship_average_points` decimal(9,1) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  PRIMARY KEY (`championship_team_id`),
+  KEY `champ-team-id_idx` (`team_id`),
+  CONSTRAINT `champ-team-id` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `championship_teams`
 --
 
@@ -34,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 16:02:18
+-- Dump completed on 2019-12-05 18:05:58

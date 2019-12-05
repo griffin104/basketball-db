@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `championship_players`
+--
+
+DROP TABLE IF EXISTS `championship_players`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `championship_players` (
+  `champ_player_id` int(11) NOT NULL AUTO_INCREMENT,
+  `player_id` int(11) DEFAULT NULL,
+  `championship_team_id` int(11) NOT NULL,
+  `champ_player_assists` int(11) NOT NULL,
+  `champ_player_steals` int(11) NOT NULL,
+  `champ_player_blocks` int(11) NOT NULL,
+  `champ_player_turnovers` int(11) NOT NULL,
+  `champ_player_points` int(11) NOT NULL,
+  `champ_player_field_goal_rate` decimal(9,1) DEFAULT NULL,
+  `champ_player_3_point_rate` decimal(9,1) DEFAULT NULL,
+  `champ_player_free_throw_rate` decimal(9,1) DEFAULT NULL,
+  PRIMARY KEY (`champ_player_id`),
+  KEY `champ-player-game_idx` (`championship_team_id`),
+  KEY `champ-player-id_idx` (`player_id`),
+  CONSTRAINT `champ-player-game` FOREIGN KEY (`championship_team_id`) REFERENCES `championship_teams` (`championship_team_id`),
+  CONSTRAINT `champ-player-id` FOREIGN KEY (`player_id`) REFERENCES `players` (`player_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `championship_players`
 --
 
@@ -34,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 16:02:17
+-- Dump completed on 2019-12-05 18:05:57
