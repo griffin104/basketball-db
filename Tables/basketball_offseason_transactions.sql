@@ -16,12 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `championship_games`
+-- Dumping data for table `offseason_transactions`
 --
 
-LOCK TABLES `championship_games` WRITE;
-/*!40000 ALTER TABLE `championship_games` DISABLE KEYS */;
-/*!40000 ALTER TABLE `championship_games` ENABLE KEYS */;
+LOCK TABLES `offseason_transactions` WRITE;
+/*!40000 ALTER TABLE `offseason_transactions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `offseason_transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -33,4 +33,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-03 13:34:03
+-- Dump completed on 2019-12-05 16:02:18

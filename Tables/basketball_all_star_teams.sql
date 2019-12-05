@@ -16,12 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `offseason_transactions`
+-- Dumping data for table `all_star_teams`
 --
 
-LOCK TABLES `offseason_transactions` WRITE;
-/*!40000 ALTER TABLE `offseason_transactions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `offseason_transactions` ENABLE KEYS */;
+LOCK TABLES `all_star_teams` WRITE;
+/*!40000 ALTER TABLE `all_star_teams` DISABLE KEYS */;
+INSERT INTO `all_star_teams` VALUES (1,'LeBron',2019,37,45,50,46,178,20),(2,'Giannis',2019,53,42,36,33,164,20);
+/*!40000 ALTER TABLE `all_star_teams` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -33,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-03 13:34:03
+-- Dump completed on 2019-12-05 16:02:17

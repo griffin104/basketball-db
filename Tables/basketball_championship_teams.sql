@@ -16,12 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `players`
+-- Dumping data for table `championship_teams`
 --
 
-LOCK TABLES `players` WRITE;
-/*!40000 ALTER TABLE `players` DISABLE KEYS */;
-/*!40000 ALTER TABLE `players` ENABLE KEYS */;
+LOCK TABLES `championship_teams` WRITE;
+/*!40000 ALTER TABLE `championship_teams` DISABLE KEYS */;
+INSERT INTO `championship_teams` VALUES (1,2019,2,4,110,105.8,30),(2,2019,4,2,114,111.5,4);
+/*!40000 ALTER TABLE `championship_teams` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -33,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-03 13:34:02
+-- Dump completed on 2019-12-05 16:02:18
