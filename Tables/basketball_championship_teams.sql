@@ -30,12 +30,12 @@ CREATE TABLE `championship_teams` (
   `championship_games_won` int(11) NOT NULL,
   `championship_games_lost` int(11) NOT NULL,
   `championship_final_score` int(11) NOT NULL,
-  `championship_average_points` decimal(9,1) NOT NULL,
+  `championship_avg_points` decimal(9,1) NOT NULL,
   `team_id` int(11) NOT NULL,
   PRIMARY KEY (`championship_team_id`),
   KEY `champ-team-id_idx` (`team_id`),
   CONSTRAINT `champ-team-id` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-06 13:18:38
+-- Dump completed on 2019-12-07 17:28:02
