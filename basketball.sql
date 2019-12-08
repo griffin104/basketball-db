@@ -116,6 +116,21 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `basketball_rating`
+--
+
+DROP TABLE IF EXISTS `basketball_rating`;
+/*!50001 DROP VIEW IF EXISTS `basketball_rating`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `basketball_rating` AS SELECT 
+ 1 AS `Name`,
+ 1 AS `Points per game`,
+ 1 AS `Championship Points`,
+ 1 AS `Basketball Rating`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `championship_players`
 --
 
@@ -195,21 +210,6 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `Team Name`,
  1 AS `Championships Played`,
  1 AS `Championships Won`*/;
-SET character_set_client = @saved_cs_client;
-
---
--- Temporary view structure for view `most_points_per_game`
---
-
-DROP TABLE IF EXISTS `most_points_per_game`;
-/*!50001 DROP VIEW IF EXISTS `most_points_per_game`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `most_points_per_game` AS SELECT 
- 1 AS `Name`,
- 1 AS `Points per game`,
- 1 AS `Championship points per game`,
- 1 AS `total points scored`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -314,7 +314,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `Name`,
  1 AS `Position`,
  1 AS `Championship Game Average Points`,
- 1 AS `Regular Season Points Average`*/;
+ 1 AS `Regular Season Average Points`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -430,6 +430,24 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `basketball_rating`
+--
+
+/*!50001 DROP VIEW IF EXISTS `basketball_rating`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `basketball_rating` AS select `players`.`player_name` AS `Name`,`players`.`player_avg_points` AS `Points per game`,`championship_players`.`champ_player_points` AS `Championship Points`,(`players`.`player_avg_points` + `championship_players`.`champ_player_points`) AS `Basketball Rating` from (`players` join `championship_players` on((`players`.`player_id` = `championship_players`.`player_id`))) order by (`players`.`player_avg_points` + `championship_players`.`champ_player_points`) desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `championships_played_and_won`
 --
 
@@ -443,24 +461,6 @@ UNLOCK TABLES;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `championships_played_and_won` AS select `teams`.`team_name` AS `Team Name`,count(`championship_teams`.`team_id`) AS `Championships Played`,sum((case when (`championship_teams`.`championship_games_won` > `championship_teams`.`championship_games_lost`) then 1 else 0 end)) AS `Championships Won` from (`championship_teams` join `teams` on((`championship_teams`.`team_id` = `teams`.`team_id`))) group by `championship_teams`.`team_id` order by `Championships Won` desc */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `most_points_per_game`
---
-
-/*!50001 DROP VIEW IF EXISTS `most_points_per_game`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `most_points_per_game` AS select `players`.`player_name` AS `Name`,`players`.`player_avg_points` AS `Points per game`,`championship_players`.`champ_player_points` AS `Championship points per game`,(`players`.`player_avg_points` + `championship_players`.`champ_player_points`) AS `total points scored` from (`players` join `championship_players` on((`players`.`player_id` = `championship_players`.`player_id`))) where (`players`.`player_avg_points` >= `championship_players`.`champ_player_id`) order by (`players`.`player_avg_points` + `championship_players`.`champ_player_points`) desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -496,7 +496,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `regular_season_vs_championship` AS select `players`.`player_name` AS `Name`,`players`.`player_position` AS `Position`,format((`championship_players`.`champ_player_points` / (`championship_teams`.`championship_games_won` + `championship_teams`.`championship_games_lost`)),2) AS `Championship Game Average Points`,`players`.`player_avg_points` AS `Regular Season Points Average` from ((`championship_players` join `players` on((`championship_players`.`player_id` = `players`.`player_id`))) join `championship_teams` on((`championship_players`.`championship_team_id` = `championship_teams`.`championship_team_id`))) where (`championship_players`.`champ_player_points` > (select avg(`championship_players`.`champ_player_points`) from `championship_players`)) order by `championship_players`.`champ_player_points` desc */;
+/*!50001 VIEW `regular_season_vs_championship` AS select `players`.`player_name` AS `Name`,`players`.`player_position` AS `Position`,format((`championship_players`.`champ_player_points` / (`championship_teams`.`championship_games_won` + `championship_teams`.`championship_games_lost`)),2) AS `Championship Game Average Points`,`players`.`player_avg_points` AS `Regular Season Average Points` from ((`championship_players` join `players` on((`championship_players`.`player_id` = `players`.`player_id`))) join `championship_teams` on((`championship_players`.`championship_team_id` = `championship_teams`.`championship_team_id`))) where (`championship_players`.`champ_player_points` > (select avg(`championship_players`.`champ_player_points`) from `championship_players`)) order by `championship_players`.`champ_player_points` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -510,4 +510,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-07 17:23:40
+-- Dump completed on 2019-12-07 20:26:49
